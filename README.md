@@ -1,0 +1,2 @@
+# gpw
+Giełda Papierów Wartościowych 
