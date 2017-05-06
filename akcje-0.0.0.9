@@ -1,0 +1,35 @@
+#!/bin/bash
+ROK=`date +%Y`
+MIESIAC=`date +%B`
+DZIENT=`date +%A`
+DZIEN=`date +%d`
+MTOUCH=`date +%M`
+MINUTY=`date +%M`
+KONTROLA=md5sum
+TEMP=Temp
+#sed -i 's/\n/\n kk/g'  /home/gribollo/Desktop/201/2016/sierpień/środa/24/22:20:31
+###
+
+#ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh  |`xargs perl -pi -e 's/\n/\nEOF\ncat <<EOF >> /g'`
+sed -i  's/^/ュ/g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+#sed -i  's/ュ//g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+sed -i 's/EOF\ncat <<EOF >> 06MAGNA/ュ#!\/bin\/sh\nROK=`date +%Y`\nMIESIAC=`date +%B`\nDZIENT=`date +%A`\nDZIEN=`date +%d`\nMTOUCH=`date +%M`\nMINUTY=`date +%M`\nKONTROLA=md5sum\nTEMP=Temp\ncat <<EOF >> 06MAGNA/'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+
+
+sed -i 's/,PLN,/\/クMIESIAC\n/g' $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+
+#sed -i  's/ュュ#/#/g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+sed -i  's/ュ/EOF\ncat <<EOF >> /g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+sed -i  's/^EOF^cat /cat /g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+#sed -i  's/ュュ#/#/g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+#sed -i  's/ュュ#/#/g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+
+#sed -i  's/シ/EOF\n/' $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+#sed -i  's/C\nC/シ/g' $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+#sed -i  's/cat <<EOF >> \nEOF\ncat <<EOF >> //' $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+sed -i 's/ク/$/g'  $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh
+cd $ROK/$MIESIAC/$DZIENT/$DZIEN/
+#ls *.sh  |`xargs perl -pi -e 's/\nEOF\ncat <<EOF >>//g'`
+sh *.sh
+#cd $ROK/$MIESIAC/$DZIENT/$DZIEN/
+#rm -r *.sh

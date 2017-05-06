@@ -1,0 +1,166 @@
+#!/bin/bash
+ROK=`date +%Y`
+MIESIAC=`date +%B`
+DZIENT=`date +%A`
+DZIEN=`date +%d`
+MTOUCH=`date +%M`
+MINUTY=`date +%M`
+KONTROLA=md5sum
+TEMP=Temp
+### Katalog Roboczy
+
+
+
+if [ -d $TEMP ]
+then
+echo 'Katalog' $TEMP
+else
+mkdir $TEMP
+fi
+
+if [ -d $TEMP/$DZIEN ]
+then
+echo 'Katalog' $DZIEN
+else
+mkdir $TEMP/$DZIEN
+fi
+
+
+if [ -e $TEMP/$DZIEN/$MTOUCH ]
+then
+echo 'Katalog' $MTOUCH
+else
+touch $TEMP/$DZIEN/$MTOUCH
+fi
+
+### Kontrola SUMY  MD5
+#w3m gpw.pl/analizy_i_statystyki | w3m -dump_source -T text/html > Temp/analizy_i_statystyki
+#ls /home/gribollo/Desktop/102/a3/analizy_i_statystyki  |`xargs perl -pi -e 's/\n/\n\t#/g'`
+#ls /home/gribollo/Desktop/102/a3/analizy_i_statystyki  |`xargs perl -pi -e 's/logo GPW SA/#!/bin/bash/g'`
+
+#if $KONTROLA  --quiet -c Temp/analizy_i_statystyki.md5
+#then
+#echo `Jest nowa Analiza`
+
+#$KONTROLA  Temp/analizy_i_statystyki > analizy_i_statystyki.md5
+#else
+
+w3m gpw.pl/analizy_i_statystyki | w3m -dump_source -T text/html > $TEMP/$DZIEN/$MTOUCH
+
+#fi
+#mv Temp/analizy_i_statystyki 
+#$KONTROLA Temp/analizy_i_statystyki | >> analizy_i_statystyki
+
+
+
+### Zakładanie Katalogu Rok
+###
+if [ -d $ROK ]
+then
+echo 'Katalog' $ROK
+else
+mkdir $ROK
+fi
+
+### Zakładanie Katalogu Mieąc
+###
+if [ -d $ROK/$MIESIAC ]
+
+then
+echo 'Katalog' $MIESIAC
+else
+mkdir $ROK/$MIESIAC
+fi
+
+### Zakładani Katalogu  Din Tygodnia
+###
+
+if [ -d $ROK/$MIESIAC/$DZIENT ]
+
+then
+echo 'Katalog' $DZIENT
+else
+mkdir $ROK/$MIESIAC/$DZIENT
+fi
+
+### Zakładani Katalogu Numr Dnia
+###
+
+if [ -d $ROK/$MIESIAC/$DZIENT/$DZIEN ]
+
+then
+echo 'Katalog' $DZIEN
+else
+mkdir $ROK/$MIESIAC/$DZIENT/$DZIEN
+fi
+
+if [ -e $ROK/$MIESIAC/$DZIENT/$DZIEN/$MINUTY  ]
+then
+echo 'Katalog' $MINUTY
+else
+touch $ROK/$MIESIAC/$DZIENT/$DZIEN/$MINUTY 
+fi
+
+
+
+### Zakładani Katalogu Godzina Minuta Sekunda
+###
+
+#if [ -d $ROK/$MIESIAC/$DZIENT/$DZIEN/$MINUTY ]
+
+#then
+#echo 'Katalog' $MINUTY
+#else
+#mkdir $ROK/$MIESIAC/$DZIENT/$DZIEN/$MINUTY
+#fi
+
+###
+### Katalog Roboczy
+
+#sed -i '/logo/  s/logo GPW SA/#!\/bin\/bash/\nsh KS'  $TEMP/$MTOUCH
+
+
+sed -i 's/[)]//g' $TEMP/$DZIEN/$MTOUCH
+sed -i 's/[(]//g' $TEMP/$DZIEN/$MTOUCH
+sed -i 's/[(]//g' $TEMP/$DZIEN/$MTOUCH
+ls $TEMP/$DZIEN/$MTOUCH  |`xargs perl -pi -e 's/%//g'`
+ls $TEMP/$DZIEN/$MTOUCH  |`xargs perl -pi -e 's/    kontraktami   WIG//g'`
+ls $TEMP/$DZIEN/$MTOUCH  |`xargs perl -pi -e 's/mln zł//g'`
+
+
+
+ls $TEMP/$DZIEN/$MTOUCH  |`xargs perl -pi -e 's/\n/\n #/g'`
+#ls $TEMP/$MTOUCH  |`xargs perl -pi -e 's/logo GPW SA/#!\/bin\/bash\nsh KS/g'`
+
+#ls $TEMP/$MTOUCH  |`xargs perl -pi -e 's/logo GPW SA/ROK=`date +%Y`/g'`
+
+sed -i '/logo/  s/logo GPW SA/#!\/bin\/bash\n\nROK=`date +%Y`\nMIESIAC=`date +%B`\nDZIENT=`date +%A`\nDZIEN=`date +%d`\nMTOUCH=`date +%M`\nMINUTY=`date +%M`\nKONTROLA=md5sum\nTEMP=Temp\n\n\n\n\n/'  $TEMP/$DZIEN/$MTOUCH
+ls $TEMP/$DZIEN/$MTOUCH  |`xargs perl -pi -e 's/ #Rok   spółek krajowych  spółek   akcjami    obligacjami     obrotu     zwrotu/cat <<EOF >> クROK\/クMIESIAC\/クDZIENT\/クDZIEN\/クMINUTY/g'`
+ls $TEMP/$DZIEN/$MTOUCH  |`xargs perl -pi -e 's/ #Zobacz pełną statystykę/EOF/g'`
+sed -i '/ク/  s/ク/$/g'  $TEMP/$DZIEN/$MTOUCH
+
+#####
+
+sh $TEMP/$DZIEN/$MTOUCH
+
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/ #//g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/,/./g'`
+
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/                               //g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/             /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/            /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/           /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/          /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/         /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/        /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/       /,/g'` 
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/      /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/     /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/    /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/   /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/  /,/g'` 
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/ /,/g'`  
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/* |`xargs perl -pi -e 's/,,,\n//g'` 
+
+ 
+

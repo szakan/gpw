@@ -1,0 +1,8 @@
+ ./robot-0.0.0.14
+Received cookie: PHPSESSID=q9ina9q625cqkj4nd7f6q5kcs1
+Received cookie: lang_code=PL
+Received cookie: BIGipServerwww.gpw.pl_pool=318964234.20480.0000
+Received cookie: TS014040d7=016c1ed7ff2cd63b5110f1954edb59bb47ae3ff559bd32c316064ba887e93fa49146dbefc8dce6a617a2833886b631c258f2afc2c2281688a14b4d8355d084600c1207bf3b8e5b2dbb94e84629ccf295d4637c5a5d
+26: 1050: 26: cannot create PGSSOFT/sierpień: Directory nonexistent
+26: 1462: 26: Syntax error: newline unexpected
+

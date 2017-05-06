@@ -1,0 +1,140 @@
+#!/bin/bash
+ROK=`date +%Y`
+MIESIAC=`date +%B`
+DZIENT=`date +%A`
+DZIEN=`date +%d`
+MTOUCH=`date +%M`
+MINUTY=`date +%M`
+GPWDATA=`date +%F`
+KONTROLA=md5sum
+TEMP=Temp
+
+
+
+if [ -d $TEMP ]
+then
+echo 'Katalog' $TEMP
+else
+mkdir $TEMP
+fi
+
+if [ -d $TEMP/$DZIEN ]
+then
+echo 'Katalog' $DZIEN
+else
+mkdir $TEMP/$DZIEN
+fi
+
+
+#if [ -e $TEMP/$DZIEN/$DZIEN ]
+#then
+#echo 'Katalog' $MTOUCH
+#else
+#touch $TEMP/$DZIEN/$DZIEN
+#fi
+##
+##https://www.gpw.pl/lista_spolek
+
+#w3m gpw.pl/lista_spolek | w3m -dump_source -T text/html > $TEMP/$DZIEN/$DZIEN
+
+#https://www.gpw.pl/akcje_i_pda_notowania_ciagle#0_b
+#w3m 'www.gpw.pl/notowania_archiwalne?type=10&date='$GPWDATA'&show.x=20&show.y=7' | w3m  -dump -cols 15000 > $TEMP/$DZIEN/$DZIEN
+w3m 'www.gpw.pl/notowania_archiwalne?type=10&date=2016-08-26&show.x=25&show.y=15' | w3m  -dump -cols 15000 > $TEMP/$DZIEN/$DZIEN
+### Zakładanie Katalogu Rok
+###
+if [ -d $ROK ]
+then
+echo 'Katalog' $ROK
+else
+mkdir $ROK
+fi
+
+### Zakładanie Katalogu Mieąc
+###
+if [ -d $ROK/$MIESIAC ]
+
+then
+echo 'Katalog' $MIESIAC
+else
+mkdir $ROK/$MIESIAC
+fi
+
+### Zakładani Katalogu  Din Tygodnia
+###
+
+if [ -d $ROK/$MIESIAC/$DZIENT ]
+
+then
+echo 'Katalog' $DZIENT
+else
+mkdir $ROK/$MIESIAC/$DZIENT
+fi
+
+### Zakładani Katalogu Numr Dnia
+###
+
+if [ -d $ROK/$MIESIAC/$DZIENT/$DZIEN ]
+
+then
+echo 'Katalog' $DZIEN
+else
+mkdir $ROK/$MIESIAC/$DZIENT/$DZIEN
+fi
+
+#if [ -e $ROK/$MIESIAC/$DZIENT/$DZIEN/$MINUTY  ]
+#then
+#echo 'Katalog' $MINUTY
+#else
+#touch $ROK/$MIESIAC/$DZIENT/$DZIEN/$MINUTY 
+#fi
+
+
+#####
+sed -i 's/[)]//g' $TEMP/$DZIEN/$DZIEN
+sed -i 's/[]]//g' $TEMP/$DZIEN/$DZIEN
+sed -i 's/[[]//g' $TEMP/$DZIEN/$DZIEN
+sed -i 's/[*]//g' $TEMP/$DZIEN/$DZIEN
+sed -i 's/[(]//g' $TEMP/$DZIEN/$DZIEN
+#ls $TEMP/$DZIEN/$DZIEN  |`xargs perl -pi -e 's/ #* //g'`
+#ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/ #//g'`
+ls $TEMP/$DZIEN/$DZIEN  |`xargs perl -pi -e 's/\n/\n #/g'`
+sed -i '/logo/  s/logo GPW SA/#!\/bin\/sh\n\nROK=`date +%Y`\nMIESIAC=`date +%B`\nDZIENT=`date +%A`\nDZIEN=`date +%d`\nMTOUCH=`date +%M`\nMINUTY=`date +%M`\nKONTROLA=md5sum\nTEMP=Temp\n\n\n\n\n/'  $TEMP/$DZIEN/$DZIEN
+
+
+ls $TEMP/$DZIEN/$DZIEN  |`xargs perl -pi -e 's/ #                                                           proc /cat <<EOF >> クROK\/クMIESIAC\/クDZIENT\/クDZIEN\/クDZIEN.sh/g'`
+ls $TEMP/$DZIEN/$DZIEN  |`xargs perl -pi -e 's/ # Jest/EOF/g'`
+ls $TEMP/$DZIEN/$DZIEN  |`xargs perl -pi -e 's/1#!/#!/g'`
+sed -i '/ク/  s/ク/$/g'  $TEMP/$DZIEN/$DZIEN
+ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/,/./g'`
+sed -i 's/ to zmiana kursu ostatniej transakcji do kursu odniesienia. W dniu//g'  $TEMP/$DZIEN/$DZIEN
+
+
+
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/        PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/       PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/      PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/     PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/    PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/   PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/  PLN    /,/g'`
+#ls $TEMP/$DZIEN/$DZIEN |`xargs perl -pi -e 's/ PLN    /,/g'`
+
+
+sh $TEMP/$DZIEN/$DZIEN
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/ #//g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/          /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/         /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/        /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/       /,/g'` 
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/      /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/     /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/    /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/   /,/g'`
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/  /,/g'` 
+ls $ROK/$MIESIAC/$DZIENT/$DZIEN/$DZIEN.sh |`xargs perl -pi -e 's/ /,/g'`
+#cp -a akcje/* $ROK/$MIESIAC/$DZIENT/$DZIEN/
+
+cp -a akcje/* $ROK/$MIESIAC/$DZIENT/$DZIEN/
+
+
+sh akcje-0.0.0.9
